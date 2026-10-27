@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="MLLM-GS: Multimodal Large Language Model Prior-Guided Fast Novel View Synthesis in Extreme Environments">
+  <meta name="keywords" content="MLLM-GS, novel view synthesis, 3D Gaussian Splatting, degraded scenes, multimodal large language model, smoke, low light, motion blur, exposure">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MLLM-GS</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+  <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#top"><strong>MLLM-GS</strong></a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="#abstract">Abstract</a>
+        <a class="navbar-item" href="#method">Method</a>
+        <a class="navbar-item" href="#qualitative">Visual Comparison</a>
+        <a class="navbar-item" href="#bibtex">BibTeX</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero gs-hero" id="top">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">MLLM-GS: Multimodal Large Language Model Prior-Guided Fast Novel View Synthesis in Extreme Environments</h1>
+            <div class="is-size-5 publication-authors" style="margin-top: 1rem;">
+              <span class="author-block">Zhiliang Wu<sup>1</sup>,</span>
+              <span class="author-block">Xinye Zheng<sup>2</sup>,</span>
+              <span class="author-block">Kun Li<sup>3</sup>,</span>
+              <span class="author-block">Fei Wang<sup>2</sup>,</span>
+              <span class="author-block">Hao Guo<sup>2</sup>,</span>
+              <span class="author-block">Yanyan Wei<sup>4</sup>,</span>
+              <span class="author-block">Guanghui Yue<sup>5</sup>,</span>
+              <span class="author-block">Beier Zhu<sup>6</sup>,</span>
+              <span class="author-block">Wei Zhou<sup>7</sup>,</span>
+              <span class="author-block">Xun Yang<sup>6</sup></span>
+            </div>
+            <div class="is-size-6 publication-affiliations">
+              <span class="author-block"><sup>1</sup>Nanyang Technological University</span>
+              <span class="author-block"><sup>2</sup>Institute of Artificial Intelligence, Hefei Comprehensive National Science Center</span>
+              <span class="author-block"><sup>3</sup>United Arab Emirates University</span>
+              <span class="author-block"><sup>4</sup>Hefei University of Technology</span>
+              <span class="author-block"><sup>5</sup>Shenzhen University</span>
+              <span class="author-block"><sup>6</sup>University of Science and Technology of China</span>
+              <span class="author-block"><sup>7</sup>Cardiff University</span>
+            </div>
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#bibtex" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-quote-right"></i></span>
+                  <span>BibTeX</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section teaser-section">
+    <div class="container is-max-desktop">
+      <figure class="image paper-figure teaser-figure">
+        <img src="./static/images/teaser.png" alt="Three pipelines for novel view synthesis under degraded conditions and efficiency comparison">
+      </figure>
+      <p class="figure-caption">
+        Illustration of three different pipelines for NVS under degraded conditions. (a) Vanilla reconstruction, (b) prior-augmented reconstruction, and (c) the proposed MLLM prior-guided pipeline. (d) Efficiency comparison with previous representative methods.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="abstract">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Novel view synthesis (NVS) in degraded scenes aims to reconstruct 3D scenes from multi-view observations affected by various degradations, and to generate clear and photorealistic images at unseen viewpoints. Despite recent advances, existing methods often rely on degradation-specific models, limiting their generalization across diverse extreme environments. Generative models provide rich visual priors, but their outputs often suffer from pixel misalignment and color deviations, which can propagate into the reconstructed 3D scene and compromise reconstruction quality. Furthermore, the high computational and memory costs of 3D reconstruction hinder the practical application of NVS in extreme environments. To this end, we propose <strong>MLLM-GS</strong>, a multimodal large language model (MLLM) prior-guided framework for fast NVS in extreme environments. MLLM-GS consists of two branches: MLLM prior-guided view enhancement and fast 3D scene reconstruction. The former leverages the rich visual priors of a frozen MLLM to enhance views under different severe degradations and introduces a lightweight correction network to reduce pixel shifts and color deviations in MLLM outputs. With supervision from only a few paired clean views, this branch produces reliable enhanced views for all degraded observations, providing pseudo-GT views for subsequent 3D reconstruction. The latter improves 3DGS efficiency by optimizing rasterization, Gaussian memory layout, and parameter updates, reducing redundant computation, memory-access overhead, and optimization costs. Extensive experiments on multiple degraded scenes demonstrate that MLLM-GS effectively handles various severe degradations and achieves high-quality NVS with significantly lower reconstruction time and memory consumption.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light" id="method">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Method</h2>
+      <figure class="image paper-figure">
+        <img src="./static/images/framework.png" alt="Overall pipeline of the MLLM-GS framework">
+      </figure>
+      <div class="content has-text-justified method-text">
+        <p>Overall pipeline of the proposed MLLM-GS framework. It consists of two branches: MLLM prior-guided view enhancement and fast 3D scene reconstruction. The former combines a frozen MLLM with a lightweight correction network trained using a few paired clean views to generate reliable pseudo-GT views for subsequent 3D reconstruction. The latter accelerates 3DGS optimization through efficient rasterization, memory layout, and parameter updates, enabling fast and high-quality NVS.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="qualitative">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Visual Comparison</h2>
+      <div class="tabs is-centered is-toggle is-small degradation-tabs">
+        <ul>
+          <li class="is-active" data-target="vis-smoke"><a>Smoke</a></li>
+          <li data-target="vis-lowlight"><a>Low Light</a></li>
+          <li data-target="vis-defocus"><a>Defocus Blur</a></li>
+          <li data-target="vis-motion"><a>Motion Blur</a></li>
+          <li data-target="vis-exposure"><a>Varying Exposure</a></li>
+        </ul>
+      </div>
+      <div class="vis-panel" id="vis-smoke">
+        <figure class="image paper-figure"><img src="./static/images/smoke_qualitative.jpg" alt="Qualitative comparison under smoke scenes"></figure>
+        <p class="figure-caption">Qualitative comparison of NVS results under smoke scenes.</p>
+      </div>
+      <div class="vis-panel" id="vis-lowlight" hidden>
+        <figure class="image paper-figure"><img src="./static/images/lowlight_qualitative.jpg" alt="Qualitative comparison under low-light scenes"></figure>
+        <p class="figure-caption">Qualitative comparison of NVS results under low-light scenes.</p>
+      </div>
+      <div class="vis-panel" id="vis-defocus" hidden>
+        <figure class="image paper-figure"><img src="./static/images/defocus_qualitative.jpg" alt="Qualitative comparison under strong defocus blur scenes"></figure>
+        <p class="figure-caption">Qualitative comparison of NVS results under strong defocus blur scenes.</p>
+      </div>
+      <div class="vis-panel" id="vis-motion" hidden>
+        <figure class="image paper-figure"><img src="./static/images/motion_qualitative.jpg" alt="Qualitative comparison under strong motion blur scenes"></figure>
+        <p class="figure-caption">Qualitative comparison of NVS results under strong motion blur scenes.</p>
+      </div>
+      <div class="vis-panel" id="vis-exposure" hidden>
+        <figure class="image paper-figure"><img src="./static/images/exposure_qualitative.jpg" alt="Qualitative comparison under varying exposure scenes"></figure>
+        <p class="figure-caption">Qualitative comparison of NVS results under varying exposure scenes.</p>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="section section-light" id="conclusion">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Conclusion</h2>
+      <div class="content has-text-justified">
+        <p>
+          MLLM-GS is an MLLM prior-guided framework for fast novel view synthesis in extreme environments. It combines a frozen MLLM with a lightweight correction network to provide reliable pseudo-GT supervision from only a few paired clean views. It also accelerates 3DGS optimization through rasterization, memory layout, and parameter update designs. Experiments show that MLLM-GS achieves high-quality NVS across diverse severe degradations with substantially lower reconstruction time and GPU memory consumption.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="bibtex">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{wu2026mllmgs,
+  author={Zhiliang Wu and Xinye Zheng and Kun Li and Fei Wang and Hao Guo and Yanyan Wei and Guanghui Yue and Beier Zhu and Wei Zhou and Xun Yang},
+  title={MLLM-GS: Multimodal Large Language Model Prior-Guided Fast Novel View Synthesis in Extreme Environments},
+  journal={Under Review},
+  year={2026}
+}</code></pre>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content has-text-centered">
+            <p>
+              Project page for <strong>MLLM-GS</strong>. The RealX3D benchmark is available on <a href="https://huggingface.co/datasets/ToferFish/RealX3D">Hugging Face</a>.
+            </p>
+            <p>
+              Website template adapted from the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies project page</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.degradation-tabs li').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        document.querySelectorAll('.degradation-tabs li').forEach(function (t) { t.classList.remove('is-active'); });
+        tab.classList.add('is-active');
+        document.querySelectorAll('.vis-panel').forEach(function (p) { p.hidden = (p.id !== tab.dataset.target); });
+      });
+    });
+  </script>
+</body>
+
+</html>
