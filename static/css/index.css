@@ -233,3 +233,10 @@ pre, .content pre { white-space: pre-wrap; word-break: break-word; }
   .degradation-tabs ul { flex-wrap: wrap; }
 }
 .method-text { margin-top: 1.25rem; }
+
+/* two-line title */
+.publication-title { font-size: 2.3rem !important; }
+.publication-title .title-line { display: block; }
+@media screen and (min-width: 1088px) {
+  .publication-title .title-line { white-space: nowrap; }
+}

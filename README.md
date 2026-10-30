@@ -16,6 +16,6 @@ The page is adapted from the Nerfies GitHub Pages template and includes:
 
 ## Notes before public release
 
-- Fill in the `Paper` and `Code` button links in `index.html` (currently `#`).
+- Fill in the `Code` button link in `index.html` (currently `#`); the Paper button links to arXiv:2610.39936.
 - Update the BibTeX entry after acceptance.
 - Figures in `static/images/` were cropped from the paper PDF.
